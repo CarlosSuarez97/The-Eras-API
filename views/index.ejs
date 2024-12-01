@@ -1,0 +1,86 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container text-center">
+    <div class="row">
+        <h1 class="poppins-semibold">The Eras API</h1>
+        <h2 class="poppins-regular">Welcome to The Eras API, your source of information on everything about Taylor Swift's discography</h2>
+    </div>
+    <br>
+    <div class="row">
+        <h3 class="poppins-semibold">Choose your favorite era</h3>
+    </div>
+    <br>
+
+    <!--This is where the user will select what information they want to bring-->
+    <form method="post" class="row text-center">
+        <div class="col-12 d-grid">
+            <button type="submit" class="btn btn-large btn-success" formaction="/getAlbums">Get All Albums</button>
+        </div>
+        <br>
+        <div class="col-4 d-grid">
+            <button class="btn btn-large" style="background-color: #b9d2b5;" value="debut" type="submit" formaction="/albumInfo" name="choice">Taylor Swift</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button class="btn btn-large" style="background-color: #f4cb8d;" value="fearless" type="submit" formaction="/albumInfo" name="choice">Fearless (Taylor's Version)</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button class="btn btn-large" type="submit" style="background-color: #d1b2d2;" value="speak now" formaction="/albumInfo" name="choice">Speak Now (Taylor's Version)</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #823549; color: white" value="red" formaction="/albumInfo" name="choice">Red (Taylor's Version)</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #b5e9f6;" name="choice" value="1989" formaction="/albumInfo">1989 (Taylor's Version)</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #847e80;" name="choice" value="reputation" formaction="/albumInfo">reputation</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #f9b2d0;" name="choice" value="lover" formaction="/albumInfo">Lover</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #cfcac6;" name="choice" value="folklore" formaction="/albumInfo">folklore</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #c8ae95;" name="choice" value="evermore" formaction="/albumInfo">evermore</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: #434961; color: white" formaction="/albumInfo" name="choice" value="midnights">Midnights</button>
+        </div>
+        <div class="col-4 d-grid">
+            <button type="submit" class="btn btn-large" style="background-color: white;" formaction="/albumInfo" name="choice" value="ttpd">The Tortured Poets Department</button>
+        </div>
+    </form>
+    <br>
+
+    <!--This is what get all albums will do-->
+    <% if(locals.albums) { %>
+    <div class="row text-center">
+            <% albums.forEach(albums => {%>
+                <div class="card" style="width: auto; margin: 5px;">
+                    <div class="card-body">
+                        <h3 class="card-title poppins-semibold"><%= albums["title"] %></h3>
+                        <p class="card-text">Released on <%= albums["release_date"] %></p>
+                    </div>
+                </div>
+            <% }) %>
+    </div>
+    <% } %>
+
+    <!--Bring up the info of an specific album-->
+    <% if(locals.albumInfo && locals.songs) {%>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title poppins-semibold"><%= albumInfo["title"] %></h3>
+                        <% songs.forEach(songs => { %>
+                            <p class="card-text poppins-regular"><%= songs["title"] %></p>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+</div>
+
+<%- include("partials/footer.ejs") %>
